@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/engine" },
+    { "path": "./packages/bots" },
+    { "path": "./apps/arena" }
+  ]
+}

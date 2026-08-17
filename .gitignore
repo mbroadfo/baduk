@@ -1,0 +1,23 @@
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+.vite/
+coverage/
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# editors / os
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# arena output
+arena-results/
+*.sgf
+!fixtures/**/*.sgf

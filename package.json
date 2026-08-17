@@ -1,0 +1,27 @@
+{
+  "name": "baduk",
+  "version": "0.1.0",
+  "private": true,
+  "description": "An interactive playspace for the game of Go — learn, play humans and bots, and watch bots play each other.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --build --force",
+    "dev": "npm run dev --workspace @baduk/web",
+    "arena": "npm run start --workspace @baduk/arena --"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
