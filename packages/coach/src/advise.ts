@@ -54,16 +54,36 @@ export function advise(game: Game, color: Color, options: AdviseOptions = {}): A
   const limit = options.alternatives ?? 5;
   const size = game.size;
 
-  const ranked = evaluateMoves(game, color);
+  // Never recommend filling your own eye. The evaluator scores it heavily
+  // negative, but by the late endgame every remaining move is negative and the
+  // least-bad one can still be an eye — so it is excluded outright rather than
+  // merely discouraged. Advising it would contradict the coach's own lesson.
+  const ranked = evaluateMoves(game, color).filter(
+    (candidate) => !game.position.isTrueEye(candidate.vertex, color),
+  );
   const alternatives = ranked.slice(0, limit);
   const best = ranked[0];
 
   if (!best) {
     return {
       level,
-      headline: 'Nothing left to play',
-      detail: 'Every remaining point would hurt your own position. Passing is correct here.',
+      headline: 'There is nothing left to play',
+      detail:
+        'Every remaining point is inside your own territory, and filling those only costs you points. Passing is correct here — when both players pass, the game is scored.',
+      concept: 'endgame',
       alternatives: [],
+    };
+  }
+
+  // Everything left actively loses ground: the honest advice is to stop.
+  if (best.score < 0) {
+    return {
+      level,
+      headline: 'This is a good moment to pass',
+      detail:
+        'Nothing on the board gains you anything now — the borders are settled, and every move left would fill your own territory or throw away a stone. Passing is a move, and here it is the best one.',
+      concept: 'endgame',
+      alternatives,
     };
   }
 
