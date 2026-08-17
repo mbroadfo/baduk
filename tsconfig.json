@@ -1,8 +1,11 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./packages/engine" },
-    { "path": "./packages/bots" },
-    { "path": "./apps/arena" }
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"]
+  },
+  "include": [
+    "packages/*/src/**/*.ts",
+    "apps/arena/src/**/*.ts",
+    "vitest.config.ts"
   ]
 }
