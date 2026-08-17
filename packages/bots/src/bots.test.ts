@@ -19,7 +19,10 @@ describe('personas', () => {
       expect(p.avatar).toBeTruthy();
       expect(p.teaches).toBeTruthy();
       expect(p.weakness).toBeTruthy();
-      expect(p.rank).toMatch(/kyu|dan/);
+      // Levels are relative and measured in the arena, deliberately not kyu
+      // ranks — nothing here is calibrated against human play.
+      expect(p.rank).toMatch(/^Level \d/);
+      expect(p.rank).not.toMatch(/kyu|dan/);
     }
   });
 

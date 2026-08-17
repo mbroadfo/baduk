@@ -30,15 +30,32 @@ npm run arena -- -b kaze -w sprout -n 20   # watch bots play each other
 Learners bond with characters far more readily than with a difficulty slider, so each opponent has
 a name, a face, and an honest statement of what it is bad at.
 
-| | Bot | Strength | Teaches you | Blind spot |
+| | Bot | Level | Teaches you | Blind spot |
 | --- | --- | --- | --- | --- |
-| 🪨 | **Pebble** | ~30 kyu | The rules themselves | No plan whatsoever |
-| 🌱 | **Sprout** | ~20 kyu | Liberties and atari | Chases stones, ignores the board |
-| 🍃 | **Kaze** | ~12 kyu | Direction of play | Reads shallowly in fights |
-| 🌀 | **Tenuki** | ~8 kyu | Whole-board judgement | Long life-and-death sequences |
+| 🪨 | **Pebble** | 1 — plays at random | The rules themselves | No plan whatsoever |
+| 🌱 | **Sprout** | 2 — tactics only | Liberties and atari | Chases stones, ignores the board |
+| 🍃 | **Kaze** | 3 — plays the whole board | Direction of play | Reads shallowly in fights |
+| 🌀 | **Tenuki** | 4 — searches ahead | Whole-board judgement | Long life-and-death sequences |
 
 Pebble, Sprout and Kaze share one transparent evaluator; Tenuki is Monte Carlo tree search with
 UCT, budgeted by wall-clock time so the interface never stalls.
+
+**These levels are measured, not estimated.** They come from running the personas against each
+other in the arena, playing both colours — not from a guess at a kyu grade. On 9×9:
+
+| Pairing | Result |
+| --- | --- |
+| Sprout vs Pebble | 9–0 (100%) |
+| Kaze vs Sprout | 9–3 (75%) |
+| Tenuki vs Kaze | 5–3 (62%), at 600ms of thinking time |
+
+The ordering is real, but the gaps above Pebble are narrower than the characters might suggest,
+and Tenuki only pulls ahead when it is given time to think. Nothing here is calibrated against
+human play, which is why you will not find a kyu rating anywhere in this repo. Reproduce with:
+
+```bash
+npm run arena -- --black kaze --white sprout --games 20
+```
 
 ## How the teaching works
 

@@ -5,7 +5,6 @@ import {
   WHITE,
   colorName,
   defaultKomi,
-  formatVertex,
   toSgf,
   type Color,
   type Vertex,
@@ -180,11 +179,12 @@ export function App() {
   }, [phase, version, botColor, askBot, setup.botId, setup.thinkMs, appendLog, bump, finishIfOver, thinking]);
 
   // --- Coach ----------------------------------------------------------------
+  // `version` is the real dependency here: the Game is mutable, so a bumped
+  // version is what signals that the position changed.
   const observations = useMemo(() => {
     if (phase !== 'playing' || game.isOver || game.toPlay !== humanColor) return [];
     return observe(game, humanColor);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, version, humanColor, game.isOver]);
+  }, [phase, version, humanColor, game]);
 
   const requestHint = useCallback(() => {
     const next = Math.min(hintIndex + 1, HINT_LEVELS.length - 1);
@@ -274,7 +274,9 @@ export function App() {
           <button type="button" onClick={humanPass} disabled={waiting}>
             Pass
           </button>
-          <button type="button" onClick={undo} disabled={game.moveCount === 0}>
+          {/* Undoing mid-think would let a stale bot reply land on a board that
+              no longer matches the position it was asked about. */}
+          <button type="button" onClick={undo} disabled={game.moveCount === 0 || thinking}>
             Undo
           </button>
           <button
@@ -334,5 +336,3 @@ export function App() {
     </main>
   );
 }
-
-export { formatVertex };
