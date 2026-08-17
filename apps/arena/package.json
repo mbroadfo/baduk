@@ -1,0 +1,19 @@
+{
+  "name": "@baduk/arena",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bot-vs-bot tournament runner — where personas get tuned and compared.",
+  "type": "module",
+  "bin": {
+    "baduk-arena": "./src/main.ts"
+  },
+  "scripts": {
+    "start": "vite-node src/main.ts",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@baduk/bots": "0.1.0",
+    "@baduk/coach": "0.1.0",
+    "@baduk/engine": "0.1.0"
+  }
+}

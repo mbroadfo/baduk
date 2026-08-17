@@ -1,0 +1,26 @@
+{
+  "name": "@baduk/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The baduk playspace — a browser Go board with a coach, deployable as a static site.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@baduk/bots": "0.1.0",
+    "@baduk/coach": "0.1.0",
+    "@baduk/engine": "0.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^5.0.0",
+    "vite": "^7.3.6"
+  }
+}
