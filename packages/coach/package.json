@@ -1,0 +1,16 @@
+{
+  "name": "@baduk/coach",
+  "version": "0.1.0",
+  "description": "The teaching layer: hints, live warnings, concept curriculum and post-game review.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@baduk/bots": "0.1.0",
+    "@baduk/engine": "0.1.0"
+  }
+}
